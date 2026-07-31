@@ -1,0 +1,42 @@
+# Ignore everything by default
+*
+
+# Allow traversing directories
+!*/
+
+# === Whitelisted Primary Files & Folders for GitHub ===
+
+# Main Master Notebook
+!Colab_Pupil_Dataset_Processor.ipynb
+
+# Essential Repository Config & Core Metadata
+!.gitignore
+!README.md
+!index.html
+!requirements.txt
+
+# Whitelisted Core Documentation & Assets
+!assets/
+!assets/**
+
+!docs/
+!docs/**
+
+!outputs/
+!outputs/**
+
+# === Explicitly Ignore Heavy Local Folders & Media ===
+dataset/
+debugging_sop-04-05-06/
+tmp/
+__pycache__/
+*.avi
+*.mp4
+*.mkv
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.zip
+*.tar.gz
+1_Raw_Frames/

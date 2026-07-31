@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pupil Dataset Processor & Hippus Engine - Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css">
+    <style>
+        :root {
+            --bg-body: #0d1117;
+            --bg-nav: rgba(13, 17, 23, 0.88);
+            --border-color: rgba(255, 255, 255, 0.12);
+            --primary: #00f2fe;
+            --accent: #00ff95;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+        }
+
+        [data-theme="light"] {
+            --bg-body: #ffffff;
+            --bg-nav: rgba(255, 255, 255, 0.92);
+            --border-color: rgba(0, 0, 0, 0.12);
+            --primary: #0284c7;
+            --accent: #10b981;
+            --text-main: #1f2328;
+            --text-muted: #656d76;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        /* Dynamic Breadcrumb Styling */
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span.separator {
+            opacity: 0.5;
+        }
+
+        .breadcrumb span.active {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--primary);
+            transform: scale(1.03);
+        }
+
+        .main-container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 3rem 1.8rem 6rem;
+        }
+
+        .markdown-body {
+            background-color: transparent !important;
+            font-family: 'Inter', sans-serif !important;
+            color: var(--text-main) !important;
+            font-size: 1rem !important;
+            line-height: 1.7 !important;
+        }
+
+        .markdown-body pre code {
+            font-family: 'Fira Code', monospace !important;
+            border-radius: 12px;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 6rem 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-brand">PUPIL RESEARCH DOCS</a>
+            <div class="breadcrumb" id="breadcrumbNav">
+                <a href="index.html">Beranda</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div id="content" class="markdown-body">
+            <div class="loading-spinner">
+                Memuat dokumen...
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Hibah Penelitian Pupil Dataset Processor. Auto-rendered Markdown Documentation.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const breadcrumbNav = document.getElementById('breadcrumbNav');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = htmlElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+            themeText.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+        }
+
+        marked.setOptions({
+            highlight: function (code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            breaks: true
+        });
+
+        // Dynamic Router & Breadcrumb Renderer
+        const urlParams = new URLSearchParams(window.location.search);
+        let targetMd = urlParams.get('doc') || 'README.md';
+
+        function updateBreadcrumb(filePath) {
+            if (filePath === 'README.md') {
+                breadcrumbNav.innerHTML = `<span class="active">Beranda (README.md)</span>`;
+                return;
+            }
+
+            const parts = filePath.split('/');
+            let currentPath = '';
+            let html = `<a href="index.html">Beranda</a>`;
+
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+                html += ` <span class="separator">/</span> `;
+                if (i === parts.length - 1) {
+                    html += `<span class="active">${part}</span>`;
+                } else {
+                    currentPath += (currentPath ? '/' : '') + part;
+                    html += `<span>${part}</span>`;
+                }
+            }
+            breadcrumbNav.innerHTML = html;
+        }
+
+        function loadMarkdownDoc(filePath) {
+            updateBreadcrumb(filePath);
+
+            fetch(filePath + '?v=' + Date.now())
+                .then(response => {
+                    if (!response.ok) throw new Error('Gagal memuat dokumen: ' + filePath);
+                    return response.text();
+                })
+                .then(markdownText => {
+                    document.getElementById('content').innerHTML = marked.parse(markdownText);
+                    hljs.highlightAll();
+
+                    // Intercept markdown link clicks
+                    document.querySelectorAll('#content a').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.endsWith('.md') && !href.startsWith('http') && !href.startsWith('#')) {
+                            let resolvedPath = href;
+                            if (filePath !== 'README.md' && !href.startsWith('/')) {
+                                const dir = filePath.substring(0, filePath.lastIndexOf('/') + 1);
+                                resolvedPath = dir + href;
+                            }
+                            link.setAttribute('href', 'index.html?doc=' + encodeURIComponent(resolvedPath));
+                        }
+                    });
+                    window.scrollTo(0, 0);
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = `
+                        <div style="color: #ef4444; padding: 2rem; border: 1px solid #ef4444; border-radius: 16px; background: rgba(239, 68, 68, 0.1);">
+                            <h3>Gagal Memuat Dokumen</h3>
+                            <p>${error.message}</p>
+                            <br>
+                            <a href="index.html" style="color: var(--primary); text-decoration: underline;">&larr; Kembali ke Beranda Dokumentasi</a>
+                        </div>
+                    `;
+                });
+        }
+
+        loadMarkdownDoc(targetMd);
+    </script>
+</body>
+</html>
