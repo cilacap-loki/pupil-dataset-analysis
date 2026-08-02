@@ -67,9 +67,17 @@ SOP-04 dipecah menjadi **3 langkah utama** untuk memastikan proses pencarian pup
      - Menyimpan berkas spreadsheet CSV (`[Nama_Responden]_laporan_analisis_sop06.csv`) di folder `4_Hasil_Analisis_SOP05_06/`.
      - Menyimpan gambar grafik analisis osilasi (`[Nama_Responden]_chart_hippus_sop06.png`).
 
+#### **Visualisasi Analisis Sinyal SOP-05**
+![Visualisasi Analisis Sinyal SOP-05](../../assets/img/sop05_visualisasi.png)
+*Gambar 4: Visualisasi Analisis Sinyal SOP-05. Panel atas menampilkan berkas asli 007_chart_hippus_sop06.png (Sinyal Diameter Pupil, Tren Baseline Moving Median, & Puncak Osilasi Hippus); Panel bawah kiri menampilkan alur penapisan sinyal 4-tahap (Linear Interpolation, Moving Median W=150, Dilated Outlier Kernel=11, & Rolling Smooth W=5); Panel bawah kanan menampilkan struktur berkas hasil ekspor CSV & PNG pada Google Drive.*
+
 #### **SOP-06: Generator Laporan PDF Diagnostik Klinis Individual**
 * **Tujuan**: Menghasilkan dokumen cetak laporan medis diagnostik klinis resmi dalam format PDF yang rapi per responden secara otomatis.
 * **Logika Kerja**:
   1. **Sistem Proteksi Otomatis**: Memastikan pustaka pembuat PDF (ReportLab) siap digunakan secara otomatis tanpa risiko program berhenti (*Anti-Crash Failsafe*).
   2. **Kompilasi Tabel Metrik Medis**: Menyusun seluruh parameter hasil analisis (Rata-rata Diameter Baseline, Frekuensi Osilasi Hippus, Fluktuasi Amplitudo, dan Tingkat Kedipan) ke dalam tabel ringkasan yang mudah dibaca.
   3. **Penggabungan Grafik & Ekspor Berkas**: Menyematkan gambar grafik osilasi pupil ke dalam dokumen dan menerbitkan berkas resmi `[Nama_Responden]_Laporan_Klinis_SOP06.pdf` di folder `4_Hasil_Analisis_SOP05_06/`.
+
+#### **Visualisasi Laporan PDF Diagnostik SOP-06**
+![Visualisasi Laporan PDF Diagnostik SOP-06](../../assets/img/sop06_visualisasi.png)
+*Gambar 5: Visualisasi Laporan PDF Diagnostik SOP-06. Panel atas menampilkan mockup dokumen cetak Laporan Diagnostik Klinis PDF Resmi berbasis ReportLab (Kop Hibah Penelitian PDP, Tabel Ringkasan Metrik Medis, & Sematan Grafik Hippus); Panel bawah kiri menampilkan rincian parameter metrik medis; Panel bawah kanan menampilkan sistem proteksi ReportLab Failsafe & lokasi penyimpanan berkas PDF resmi.*
