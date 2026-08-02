@@ -36,6 +36,11 @@ SOP-07 dipecah menjadi **3 langkah utama** untuk memastikan pengujian algoritma 
        - **Panel Kanan Bawah (4)**: Grafik Perbandingan Trajektori Realtime Sumbu Y (Ground Truth vs Prediksi V3).
     4. **Penyimpanan Berkas Video**: Disimpan di folder `Output_LPW_[ID]/LPW_[ID]_Video_Evaluasi_4Panel.mp4` (atau `LPW_009_Super_Komparasi.mp4`).
 
+#### **Demo Video Komparasi Realtime LPW (Ground Truth vs V3 Engine)**
+<video controls width="100%" src="../../assets/video/LPW_009_Super_Komparasi.mp4" poster="../../assets/img/sop07_langkah2_visualisasi.png"></video>
+
+*📹 **Putar Video di GitHub**: [Unduh / Putar Langsung Video MP4 LPW_009_Super_Komparasi.mp4](../../assets/video/LPW_009_Super_Komparasi.mp4)*
+
 #### **Visualisasi Video Evaluasi SOP-07 (Langkah 2)**
 ![Visualisasi Video Evaluasi SOP-07 Langkah 2](../../assets/img/sop07_langkah2_visualisasi.png)
 *Gambar 2: Visualisasi Video Evaluasi SOP-07 Langkah 2. Panel atas menampilkan bingkai asli dari video MP4 komparasi 4-panel (1280x960 px @ 95 FPS) yang diekstrak langsung dari LPW_009_Super_Komparasi.mp4; Panel bawah kiri menampilkan rincian Re-use Universal V3 Engine dari SOP-04; Panel bawah kanan menampilkan spesifikasi berkas video evaluasi 4-panel.*
