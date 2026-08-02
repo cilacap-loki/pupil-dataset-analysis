@@ -40,3 +40,7 @@ __pycache__/
 *.zip
 *.tar.gz
 1_Raw_Frames/
+
+# Keep assets images tracked
+!assets/**
+

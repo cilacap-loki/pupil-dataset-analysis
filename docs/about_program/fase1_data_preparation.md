@@ -42,3 +42,9 @@ Fase 1 berfokus pada tahap penyiapan data awal dari video mentah original hingga
      $$\hat{X}_c^{(i)} = \alpha \cdot X_{\text{target}}^{(i)} + (1 - \alpha) \cdot \hat{X}_c^{(i-1)}, \quad \alpha = 0.08$$
      *(Penggunaan nilai $\alpha = 0.08$ memberikan efek peredaman guncangan yang sangat halus/smooth).*
   4. **Stabilized Boundary Crop & Padding**: Memotong sub-gambar $800 \times 800\text{ px}$ mengelilingi koordinat terstabilisasi. Jika batas pemotongan melebihi batas bingkai asli, sistem otomatis menerapkan padding batas `BORDER_REPLICATE`. Hasil potong disimpan ke folder `2_Grayscale_ROI_SOP03/`.
+
+#### **Visualisasi Alur Kerja SOP-03**
+![Visualisasi Alur Kerja SOP-03](../../assets/fase1/sop03_visualisasi_proses.png)
+*Gambar 1: Visualisasi 3-panel alur kerja SOP-03. Panel 1 menampilkan Bingkai Mentah Original; Panel 2 menampilkan area aktif 15% Border Margin Gating & titik tergelap pupil `minLoc` (silang merah); Panel 3 menampilkan hasil potong ROI $800 \times 800\text{ px}$ terstabilisasi.*
+
+
