@@ -30,7 +30,8 @@ Fase 1 berfokus pada tahap penyiapan data awal dari video mentah original hingga
 
 #### **Visualisasi Alur Kerja SOP-02**
 ![Visualisasi Alur Kerja SOP-02](../../assets/img/sop02_visualisasi_proses.png)
-*Gambar 1: Visualisasi alur kerja SOP-02. Panel atas menampilkan grafik pemindaian kepadatan kedipan di sepanjang durasi video dan sorotan hijau untuk Segmen Optimal 30 Detik (1.500 Frame); Panel bawah menampilkan perbandingan sampel Frame Normal (Pupil Terbuka) vs Frame Kedipan (Mata Terpejam).*
+*Gambar 1: Visualisasi alur kerja SOP-02. Panel atas menampilkan pemindaian diameter pupil (px), ambang kedipan (5.0 px), serta ilustrasi pergeseran jendela geser (Sliding Window Shift) dari segmen berkedip (Frame 0-1500, Ditolak) menuju Segmen Optimal 30 Detik (Frame 450-1950, Terpilih); Panel bawah menampilkan perbandingan sampel Frame Normal (Mata Terbuka - open.png) vs Frame Kedipan Murni (Mata Terpejam - blink.png).*
+
 
 
 #### **SOP-03: Pra-Pemrosesan Grayscale & EMA Motion-Stabilized Crop ROI (800x800 px)**
