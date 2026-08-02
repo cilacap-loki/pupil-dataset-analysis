@@ -302,7 +302,29 @@
                             link.setAttribute('href', 'index.html?doc=' + encodeURIComponent(resolvedPath));
                         }
                     });
+
+                    // Resolve relative image src paths based on markdown file directory
+                    document.querySelectorAll('#content img').forEach(img => {
+                        const src = img.getAttribute('src');
+                        if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/')) {
+                            let dir = '';
+                            if (filePath.includes('/')) {
+                                dir = filePath.substring(0, filePath.lastIndexOf('/') + 1);
+                            }
+                            try {
+                                const dummyBase = 'https://dummy.base/';
+                                const resolvedUrl = new URL(src, dummyBase + dir);
+                                let normPath = resolvedUrl.pathname;
+                                if (normPath.startsWith('/')) normPath = normPath.substring(1);
+                                img.setAttribute('src', normPath);
+                            } catch (e) {
+                                console.error('Image src resolution error:', e);
+                            }
+                        }
+                    });
+
                     window.scrollTo(0, 0);
+
                 })
                 .catch(error => {
                     document.getElementById('content').innerHTML = `
