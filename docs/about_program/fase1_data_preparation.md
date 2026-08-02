@@ -28,6 +28,11 @@ Fase 1 berfokus pada tahap penyiapan data awal dari video mentah original hingga
   2. **Seleksi Jendela Waktu Optimal**: Memindai seluruh durasi video menggunakan jendela geser (*sliding window*) berdurasi 30 detik (1.500 frame). Sistem secara otomatis memilih rentang waktu dengan jumlah kedipan paling sedikit.
   3. **Ekstraksi Frame Murni**: Memotong 1.500 frame tepat pada rentang waktu terpilih dan menyimpannya secara *lossless* (`.png`) langsung ke folder `1_Raw_Frames_SOP01&02/`.
 
+#### **Visualisasi Alur Kerja SOP-02**
+![Visualisasi Alur Kerja SOP-02](../../assets/img/sop02_visualisasi_proses.png)
+*Gambar 1: Visualisasi alur kerja SOP-02. Panel atas menampilkan grafik pemindaian kepadatan kedipan di sepanjang durasi video dan sorotan hijau untuk Segmen Optimal 30 Detik (1.500 Frame); Panel bawah menampilkan perbandingan sampel Frame Normal (Pupil Terbuka) vs Frame Kedipan (Mata Terpejam).*
+
+
 #### **SOP-03: Pra-Pemrosesan Grayscale & EMA Motion-Stabilized Crop ROI (800x800 px)**
 * **Tujuan**: Pemotongan area mata (*Region of Interest / ROI*) resolusi 800x800 piksel yang terstabilisasi secara halus tanpa guncangan akibat pergerakan kepala responden.
 * **Logika Kerja**:
@@ -37,5 +42,6 @@ Fase 1 berfokus pada tahap penyiapan data awal dari video mentah original hingga
   4. **Pemotongan ROI & Penanganan Batas Gambar**: Memotong gambar area mata berukuran 800x800 piksel tepat di sekeliling titik pusat terstabilisasi. Jika kotak pemotongan menyentuh tepi luar gambar, sistem otomatis menambahkan bantalan tepi (*border padding*) agar ukuran gambar hasil potong tetap tepat 800x800 piksel. Gambar hasil potong disimpan ke folder `2_Grayscale_ROI_SOP03/`.
 
 #### **Visualisasi Alur Kerja SOP-03**
-![Visualisasi Alur Kerja SOP-03](../../assets/fase1/sop03_visualisasi_proses.png)
-*Gambar 1: Visualisasi 3-panel alur kerja SOP-03. Panel 1 menampilkan Bingkai Mentah Original; Panel 2 menampilkan area aktif 15% Border Margin Gating & titik tergelap pupil (silang merah); Panel 3 menampilkan hasil potong ROI 800x800 piksel terstabilisasi.*
+![Visualisasi Alur Kerja SOP-03](../../assets/img/sop03_visualisasi_proses.png)
+*Gambar 2: Visualisasi 3-panel alur kerja SOP-03. Panel 1 menampilkan Bingkai Mentah Original; Panel 2 menampilkan area aktif 15% Border Margin Gating & titik tergelap pupil (silang merah); Panel 3 menampilkan hasil potong ROI 800x800 piksel terstabilisasi.*
+
