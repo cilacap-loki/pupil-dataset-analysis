@@ -36,10 +36,10 @@ Repositori resmi ini memuat alur kerja otomasisasi komputasi, master notebook, d
 
 ### **1. Cakupan Riset (Research Scope)**
 Riset ini mencakup perancangan alur komputasi terstandarisasi (9 SOP dalam 3 Fase) untuk mengolah video mentah rekaman mata menjadi dataset digital terstruktur:
-* **Ekstraksi Frame Lossless**: Mengonversi video rekaman mentah menjadi 1.500 bingkai PNG *Lossless* (30 Detik @ 50 FPS).
-* **Stabilisasi ROI Mata**: Pemotongan otomatis area mata $800 \times 800\text{ px}$ berbasis penapis *Exponential Moving Average* (EMA).
-* **Segmentasi Pupil Adaptif**: Segmentasi biner pupil menggunakan ambang batas adaptif ($T = V_{\text{min}} + 25$) dan penutupan pantulan *glint* LED.
-* **Ekstraksi Dinamika Diameter**: Perhitungan diameter simetris isotropik ($D = 2\sqrt{\text{Area}/\pi}$), titik pusat $(X, Y)$, dan penapisan kedipan.
+* **Ekstraksi Frame Lossless**: Mengonversi video rekaman mentah menjadi 1.500 bingkai gambar berpresisi tinggi tanpa penurunan kualitas (30 Detik @ 50 FPS).
+* **Stabilisasi Potongan Mata (ROI)**: Pemotongan otomatis area mata ukuran $800 \times 800\text{ px}$ yang stabil dan meredam guncangan pergerakan mata.
+* **Segmentasi Pupil Adaptif**: Pemisahan warna pupil otomatis (masker biner hitam-putih) yang adaptif terhadap perubahan pencahayaan dan pembersihan pantulan cahaya LED.
+* **Ekstraksi Ukuran & Gerak Pupil**: Pengukuran diameter pupil, koordinat posisi titik pusat pupil, serta penapisan otomatis saat mata terpejam (kedipan).
 
 ### **2. Luaran Utama Riset (Grant Deliverables)**
 * **Master Notebook Colab**: [`Colab_Pupil_Dataset_Processor.ipynb`](https://colab.research.google.com/drive/1L1kNg5T-YRJfGFKLBbLjp5Z9J1r9pVnx) (Pipeline SOP-01 s/d SOP-06).
