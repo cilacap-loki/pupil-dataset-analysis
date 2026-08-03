@@ -29,7 +29,6 @@ Repositori resmi ini memuat alur kerja otomasisasi komputasi, master notebook, d
 * **[FASE 1: Data Preparation & Cleaning (SOP-01 s/d SOP-03)](docs/about_program/fase1_data_preparation.md)**
 * **[FASE 2: Pipeline Otomasi & Segmentasi (SOP-04 s/d SOP-06)](docs/about_program/fase2_pipeline_otomasi.md)**
 * **[FASE 3: Validasi Benchmark & Penyelesaian (SOP-07 s/d SOP-09)](docs/about_program/fase3_validasi_benchmark.md)**
-* **[TECHNICAL PAPER: Spesifikasi Metodologi & Algoritma Riset](docs/Technical_Paper_Pupil_Processor.md)**
 
 ---
 
@@ -50,7 +49,6 @@ Riset ini mencakup perancangan alur komputasi terstandarisasi (9 SOP dalam 3 Fas
   - 1.500 Bingkai PNG Masker Biner Pupil (`1_Mask_Biner/`).
   - Berkas Tabular CSV Deret-Waktu (`[Nama_Responden]_laporan_analisis_sop06.csv`).
 * **Media Verifikasi Visual**: Berkas Video Terpadu MP4 3-panel (Tracking + Masker Biner + Grafik Temporal Realtime).
-* **Technical Paper Akademis**: Berkas spesifikasi teknis metodologi ([`Technical_Paper_Pupil_Processor.md`](docs/Technical_Paper_Pupil_Processor.md)).
 
 ### **3. Batasan Riset (Research Limitations)**
 * **Tahap Eksplorasi Awal**: Riset ini difokuskan pada pembangunan dataset dan analisis awal dinamika pupil.
@@ -62,12 +60,12 @@ Riset ini mencakup perancangan alur komputasi terstandarisasi (9 SOP dalam 3 Fas
 
 Akuisisi dataset video pupil resolusi tinggi dilakukan selama **6 Hari Sesi Perekaman (08 Juni 2026 – 14 Juni 2026)** menggunakan kombinasi perangkat optik & sinematografi profesional:
 
-| Perangkat Hardware / Peralatan | Spesifikasi Teknis Optik & Sinematografi | Peran dalam Akuisisi Dataset |
-| :--- | :--- | :--- |
-| **Camera Sony A7 IV Mirrorless** | Full Frame 33MP, FF 4K30p / 1.5x Crop 4K60p 10-bit 4:2:2 | Perekaman video mentah resolusi tinggi dengan detail piksel mikro |
-| **Sony FE 100mm F/2.8 Macro GM OSS** | Lensa Macro 1.4x (E-mount) khusus pemotretan *close-up* | Isolasi penampang iris dan pupil tanpa distorsi optik tepi |
-| **Yongnuo YN-300 IV LED Video Light** | Portable RGB LED Light (3200K-5600K) | Penjagaan suhu kecerahan konstan untuk mengurangi variansi bayangan |
-| **Light Stand Takara Spirit-3** | Stand Penyangga Lampu Statis | Penyangga sumber cahaya bebas guncangan saat perekaman berlangsung |
+| Perangkat Hardware / Peralatan | Visual Perangkat | Spesifikasi Teknis Optik & Sinematografi | Peran dalam Akuisisi Dataset |
+| :--- | :---: | :--- | :--- |
+| **Camera Sony A7 IV Mirrorless** | <img src="assets/tools/Camera%20Sony%20A7%20IV%20Mirrorless.jpg" width="120" alt="Sony A7 IV"> | Full Frame 33MP, FF 4K30p / 1.5x Crop 4K60p 10-bit 4:2:2 | Perekaman video mentah resolusi tinggi dengan detail piksel mikro |
+| **Sony FE 100mm F/2.8 Macro GM OSS** | <img src="assets/tools/Sony%20FE%20100mm%20F2.8%20Macro%20GM%20OSS.jpg" width="120" alt="Sony FE 100mm Macro"> | Lensa Macro 1.4x (E-mount) khusus pemotretan *close-up* | Isolasi penampang iris dan pupil tanpa distorsi optik tepi |
+| **Yongnuo YN-300 IV LED Video Light** | <img src="assets/tools/Yongnuo%20YN-300%20IV%20LED%20Video%20Light.jpg" width="120" alt="Yongnuo YN-300 IV"> | Portable RGB LED Light (3200K-5600K) | Penjagaan suhu kecerahan konstan untuk mengurangi variansi bayangan |
+| **Light Stand Takara Spirit-3** | <img src="assets/tools/Light%20Stand%20Takara%20Spirit-3.jpg" width="120" alt="Takara Spirit-3"> | Stand Penyangga Lampu Statis | Penyangga sumber cahaya bebas guncangan saat perekaman berlangsung |
 
 ---
 
@@ -100,5 +98,4 @@ Outputs/
 
 * **Judul Hibah**: *Pengembangan Dataset Video Pupil dan Analisis Awal Dinamika Diameter Pupil Menggunakan Visi Komputer*
 * **Tahun Pelaksanaan**: 2026
-* **Technical Paper**: [`docs/Technical_Paper_Pupil_Processor.md`](docs/Technical_Paper_Pupil_Processor.md)
 * **Lisensi Repositori**: Akademis / Hibah Penelitian (Restricted Use)
