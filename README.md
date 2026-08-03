@@ -71,9 +71,9 @@ Akuisisi dataset video pupil resolusi tinggi dilakukan selama **6 Hari Sesi Pere
 Format video mentah (*raw*) yang dihasilkan dari proses perekaman dan digunakan sebagai *input* utama dalam *pipeline* komputasi ini memiliki spesifikasi teknis sebagai berikut:
 * **Resolusi Video**: $1920 \times 1080\text{ piksel}$ (Full HD 1080p).
 * **Frame Rate**: $50\text{ FPS}$ (Sangat krusial untuk menangkap dinamika pergerakan mata tingkat milidetik dan osilasi pupil).
-* **Codec Video**: H.264 / AVC (MPEG-4 Part 10).
+* **Codec Video**: H.264 / AVC.
 * **Video Bitrate**: $\approx 48\text{ Mbps}$ (Kualitas rekam tingkat tinggi untuk mempertahankan keutuhan tekstur iris dan ketajaman batas pupil).
-* **Durasi Perekaman**: $\approx 40-60\text{ Detik}$ per sesi responden (Nantinya dipotong otomatis menjadi 30 detik murni pada SOP-02).
+* **Durasi Perekaman**: $\approx 40-50\text{ Detik}$ per sesi responden (Nantinya dipotong otomatis menjadi 30 detik murni pada SOP-02).
 
 ---
 
