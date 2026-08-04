@@ -14,6 +14,10 @@ Fase 3 berfokus pada tahap validasi kuantitatif mutlak (*cross-validation*) untu
 ### **2. DETAIL STANDAR OPERASIONAL PROSEDUR (SOP)**
 
 #### **SOP-07: Validasi Benchmark Ground Truth LPW (Pengujian Dataset Sekunder)**
+
+![Alur Evaluasi Ground Truth SOP-07](../../assets/img/alur_evaluasi_gt.png)
+*Gambar: Alur Sistematis Evaluasi Algoritma terhadap Ground Truth LPW*
+
 SOP-07 dipecah menjadi **3 langkah utama** untuk memastikan pengujian algoritma terhadap dataset sekunder LPW berjalan sistematis, transparan, dan terukur secara empiris:
 
 * **SOP-07 (Langkah 1): Form Pemilihan Dataset LPW & Pemindaian Otomatis Drive**
