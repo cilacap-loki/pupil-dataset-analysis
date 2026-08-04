@@ -49,7 +49,7 @@ SOP-07 dipecah menjadi **3 langkah utama** untuk memastikan pengujian algoritma 
     1. **Kalkulasi Metrik Error Kuantitatif**:
        - **Mean Center Error (px)**: Rata-rata deviasi jarak Euclidean antara koordinat prediksi V3 dan Ground Truth.
        - **Median Center Error (px)**: Nilai tengah deviasi kesalahan pelacakan.
-       - **Detection Rate (< 5px & < 10px %)**: Persentase frame yang berhasil dilacak dengan tingkat kesalahan di bawah 5 piksel dan 10 piksel.
+       - **Detection Rate (< 10px %)**: Persentase frame yang berhasil dilacak dengan tingkat kesalahan di bawah 10 piksel.
     2. **Ekspor 5 Berkas Luaran Evaluasi**:
        - Berkas **`pred.txt`**: Teks koordinat `(x, y)` hasil prediksi format standar benchmark LPW.
        - Berkas **`LPW_[ID]_Benchmark_Report.csv`**: Spreadsheet CSV rincian data error per frame.
@@ -58,7 +58,7 @@ SOP-07 dipecah menjadi **3 langkah utama** untuk memastikan pengujian algoritma 
 
 #### **Visualisasi Ekspor & Evaluasi SOP-07 (Langkah 3)**
 ![Visualisasi Ekspor & Evaluasi SOP-07 Langkah 3](../../assets/img/sop07_langkah3_visualisasi.png)
-*Gambar 3: Visualisasi Ekspor & Evaluasi SOP-07 Langkah 3. Panel atas menampilkan 3 berkas grafik PNG statis asli LPW_009 (Sumbu X Chart, Sumbu Y Chart, & Error Chart dengan garis ambang presisi 5px); Panel bawah kiri menampilkan parameter kuantitatif benchmark LPW; Panel bawah kanan menampilkan 5 berkas luaran SOP-07 Langkah 3.*
+*Gambar 3: Visualisasi Ekspor & Evaluasi SOP-07 Langkah 3. Panel atas menampilkan 3 berkas grafik PNG statis asli LPW_009 (Sumbu X Chart, Sumbu Y Chart, & Error Chart dengan garis ambang toleransi 10px); Panel bawah kiri menampilkan parameter kuantitatif benchmark LPW; Panel bawah kanan menampilkan 5 berkas luaran SOP-07 Langkah 3.*
 
 ---
 
