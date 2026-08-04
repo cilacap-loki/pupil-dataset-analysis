@@ -6,6 +6,9 @@
 ### **1. RINGKASAN FASE 1**
 Fase 1 berfokus pada tahap penyiapan data awal dari video mentah original hingga menjadi kepingan gambar *PNG Lossless* yang terisolasi pada jendela **Segmen Optimal 30 Detik** (1.500 Bingkai @ 50 FPS), serta pra-pemrosesan pemotongan area mata (*Region of Interest / ROI*) 800x800 piksel yang terstabilisasi tanpa distorsi pergerakan kepala.
 
+![Visualisasi Garis Besar Fase 1](../../assets/img/fase1_visualisasi_garis_besar.png)
+*Gambar: Arsitektur Garis Besar Fase 1 (Data Preparation & Cleaning)*
+
 ---
 
 ### **2. DETAIL STANDAR OPERASIONAL PROSEDUR (SOP)**

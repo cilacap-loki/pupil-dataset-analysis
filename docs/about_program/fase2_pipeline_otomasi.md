@@ -6,6 +6,9 @@
 ### **1. RINGKASAN FASE 2**
 Fase 2 merupakan inti dari platform komputasi **Pupil Dataset Processor (PDP)**. Pada tahap ini, sistem melakukan segmentasi area pupil secara otomatis dan berpresisi tinggi dari gambar pemotongan area mata (ROI), mengisolasi bentuk pupil menjadi masker hitam-putih (masker biner), merekayasa deret data osilasi gerak pupil (*Pupillary Hippus*), serta menghasilkan luaran berupa video verifikasi terpadu dan laporan PDF diagnostik klinis resmi.
 
+![Visualisasi Garis Besar Fase 2](../../assets/img/fase2_visualisasi_garis_besar.png)
+*Gambar: Arsitektur Garis Besar Fase 2 (Pipeline Otomasi & Segmentasi)*
+
 ---
 
 ### **2. DETAIL STANDAR OPERASIONAL PROSEDUR (SOP)**

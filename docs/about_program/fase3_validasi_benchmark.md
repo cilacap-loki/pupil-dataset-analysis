@@ -6,6 +6,9 @@
 ### **1. RINGKASAN FASE 3**
 Fase 3 berfokus pada tahap validasi kuantitatif mutlak (*cross-validation*) untuk mengukur seberapa akurat algoritma OpenCV kita jika disandingkan dengan label *Ground Truth* publik berstandar internasional (*Labeled Pupils in the Wild* / LPW Dataset), serta pengarsipan data dan finalisasi publikasi riset.
 
+![Visualisasi Garis Besar Fase 3](../../assets/img/fase3_visualisasi_garis_besar.png)
+*Gambar: Arsitektur Garis Besar Fase 3 (Validasi Benchmark & Penyelesaian Riset)*
+
 ---
 
 ### **2. DETAIL STANDAR OPERASIONAL PROSEDUR (SOP)**
