@@ -21,7 +21,7 @@ Repositori resmi ini memuat alur kerja otomasisasi komputasi, master notebook, d
 <summary><b>Klik di sini untuk melihat Diagram Pipeline Riset (SOP-01 s/d SOP-09)</b></summary>
 <br>
 <p align="center">
-  <img src="assets/img/pipeline_riset.webp" width="100%" alt="Diagram Pipeline Riset SOP">
+  <img src="assets/img/pipeline_riset.png" width="100%" alt="Diagram Pipeline Riset SOP">
 </p>
 </details>
 
