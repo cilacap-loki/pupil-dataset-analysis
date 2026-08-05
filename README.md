@@ -26,6 +26,8 @@ Repositori resmi ini memuat alur kerja otomasisasi komputasi, master notebook, d
 </details>
 
 ### **Menu Dokumentasi Utama Riset:**
+* **[Materi Presentasi: Membaca Grafik Medis Laporan Akhir (SOP-06)](docs/materi/baca_grafik_hippus.md)**
+* **[Materi Presentasi: Apa itu Fenomena Pupillary Hippus?](docs/materi/fenomena_hippus.md)**
 * **[FASE 1: Data Preparation & Cleaning (SOP-01 s/d SOP-03)](docs/about_program/fase1_data_preparation.md)**
 * **[FASE 2: Pipeline Otomasi & Segmentasi (SOP-04 s/d SOP-06)](docs/about_program/fase2_pipeline_otomasi.md)**
 * **[FASE 3: Validasi Benchmark & Penyelesaian (SOP-07 s/d SOP-09)](docs/about_program/fase3_validasi_benchmark.md)**
