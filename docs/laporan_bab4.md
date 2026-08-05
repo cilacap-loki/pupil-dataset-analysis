@@ -3,7 +3,7 @@
 **4.5.1 Pendahuluan Tahapan Eksperimen**
 
 *   **a. Tujuan tahapan eksperimen:** Tahapan eksperimen ini bertujuan untuk merancang, mengimplementasikan, dan menguji algoritma visi komputer (*Pupil Dataset Processor*) yang mampu mengekstraksi parameter klinis fenomena *Pupillary Hippus* (Frekuensi dan Fluktuasi Amplitudo) secara otomatis dari rekaman video.
-*   **b. Gambaran umum pipeline penelitian:** Penelitian ini dibagi menjadi tiga fase komputasi utama. Fase 1 berfokus pada persiapan data (*Data Preparation*) dan stabilisasi citra. Fase 2 merupakan *Pipeline* Otomasi utama yang menjalankan segmentasi, pelacakan koordinat, dan ekstraksi parameter klinis. Fase 3 adalah tahap validasi model (SOP-07) dengan mengkomparasikan hasil prediksi program terhadap *Ground Truth*.
+*   **b. Gambaran umum pipeline penelitian:** Penelitian ini dibagi menjadi tiga fase komputasi utama. Fase 1 berfokus pada persiapan data (*Data Preparation*) dan stabilisasi frame. Fase 2 merupakan *Pipeline* Otomasi utama yang menjalankan segmentasi, pelacakan koordinat, dan ekstraksi parameter klinis. Fase 3 adalah tahap validasi model (SOP-07) dengan mengkomparasikan hasil prediksi program terhadap *Ground Truth*.
 *   **c. Keterkaitan antar tahapan:** Setiap tahapan bersifat linear dan saling bergantung. Hasil pemotongan koordinat mata (*ROI Crop*) dari tahap prapemrosesan menjadi masukan mutlak bagi modul segmentasi biner. Hasil dari segmentasi tersebut kemudian digunakan oleh modul pelacakan (*tracking*) untuk membentuk data deret waktu (*time series*), yang pada akhirnya diolah menjadi Laporan Klinis (PDF).
 
 ---
@@ -11,7 +11,7 @@
 **4.5.2 Input Video**
 
 1.  **Tujuan:** Memasukkan dataset video mata mentah ke dalam lingkungan komputasi (*workspace*) agar dapat diakses oleh algoritma pra-pemrosesan.
-2.  **Dasar teori singkat:** Video digital adalah sekumpulan citra (*frames*) yang diputar secara sekuensial pada kecepatan tertentu (*Frame Rate*). Semakin tinggi *frame rate*, semakin detail pergerakan mikroskopis mata (Hippus) yang dapat direkam.
+2.  **Dasar teori singkat:** Video digital adalah sekumpulan frame (*frames*) yang diputar secara sekuensial pada kecepatan tertentu (*Frame Rate*). Semakin tinggi *frame rate*, semakin detail pergerakan mikroskopis mata (Hippus) yang dapat direkam.
 3.  **Spesifikasi data/video:** Penelitian ini menggunakan **Dataset Sekunder Labeled Pupils in the Wild (LPW)**. Format video adalah `.avi` yang direkam menggunakan *head-mounted camera* dengan sudut pandang samping (*Side View Angle*). Frame rate bervariasi antara 50 hingga 95 FPS.
 4.  **Implementasi:** Proses ini diimplementasikan dalam **SOP-01 (Inisialisasi Environment)**. Sistem melakukan pemasangan (*mounting*) pada Google Drive dan menginisialisasi jalur direktori untuk membaca folder responden (misal: subfolder `001`, `004`, `015`).
 5.  **Hasil implementasi:** Direktori kerja terhubung secara sukses dengan sumber dataset sekunder, ditandai dengan ditemukannya berkas `.avi` dan `.txt` (Kunci Jawaban) milik target responden.
@@ -20,8 +20,8 @@
 
 **4.5.3 Pre-processing**
 
-1.  **Tujuan:** Menyeragamkan format citra, menghilangkan warna (mengubah ke keabuan), dan melakukan ekstraksi seluruh *frame* tanpa kompresi (*lossless*).
-2.  **Dasar teori:** *Grayscale conversion* mengubah citra berwarna (RGB) menjadi satu saluran intensitas cahaya (0-255) yang lebih ringan diproses. Ekstraksi *lossless* memastikan tidak ada piksel yang terdegradasi kualitasnya akibat proses kompresi video.
+1.  **Tujuan:** Menyeragamkan format frame, menghilangkan warna (mengubah ke keabuan), dan melakukan ekstraksi seluruh *frame* tanpa kompresi (*lossless*).
+2.  **Dasar teori:** *Grayscale conversion* mengubah frame berwarna (RGB) menjadi satu saluran intensitas cahaya (0-255) yang lebih ringan diproses. Ekstraksi *lossless* memastikan tidak ada piksel yang terdegradasi kualitasnya akibat proses kompresi video.
 3.  **Algoritma:** Algoritma membaca video dari awal hingga durasi 30 detik, mengekstraksi 1500 *frame* (asumsi minimum 50 FPS), dan membuang informasi warna kromatik.
 4.  **Implementasi:** Berjalan pada tahap **SOP-02 (Ekstraksi Lossless Frames)** dan paruh awal **SOP-03 (Pra-Pemrosesan Grayscale)** menggunakan pustaka *OpenCV* di lingkungan Python.
 5.  **Hasil:** Kumpulan 1500 berkas gambar berekstensi `.png` berwarna keabuan dengan kualitas piksel yang presisi, siap untuk diisolasi.
@@ -30,21 +30,21 @@
 
 **4.5.4 Eye Detection**
 
-1.  **Tujuan:** Memotong citra penuh menjadi *Region of Interest* (ROI) yang hanya memuat area mata target, sekaligus menstabilkan pergerakan kepala pasien.
+1.  **Tujuan:** Memotong frame penuh menjadi *Region of Interest* (ROI) yang hanya memuat area mata target, sekaligus menstabilkan pergerakan kepala pasien.
 2.  **Dasar teori:** Karena dataset direkam secara *in-the-wild*, gerakan kepala pasien menyebabkan posisi bola mata berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun stabil (*Motion-Stabilized Crop*) agar pupil tetap berada di tengah bingkai tanpa tergeser drastis.
 3.  **Algoritma:** Sistem menggunakan fungsi matematika penyeimbang *Exponential Moving Average* (EMA) untuk meredam efek guncangan kamera (titik tengah bergeser perlahan) tanpa menghilangkan getaran alami pupil mata.
 4.  **Parameter:** Konstanta penghalusan EMA ($\alpha$) ditetapkan sebesar **0.15**, dan ukuran bingkai hasil pemotongan adalah resolusi mutlak **800x800 piksel**.
-5.  **Hasil deteksi:** Rangkaian citra *grayscale* berukuran 800x800 piksel yang terpusat tepat pada bola mata dan bebas dari guncangan ekstrem. Ini mengakhiri fase eksekusi **SOP-03**.
+5.  **Hasil deteksi:** Rangkaian frame *grayscale* berukuran 800x800 piksel yang terpusat tepat pada bola mata dan bebas dari guncangan ekstrem. Ini mengakhiri fase eksekusi **SOP-03**.
 
 ---
 
 **4.5.5 Pupil Segmentation**
 
 1.  **Tujuan:** Memisahkan secara tegas antara objek target hitam pekat (Pupil, direpresentasikan dengan nilai biner 1) dan latar belakang yang tidak relevan seperti iris, sklera, atau kulit mata (direpresentasikan dengan biner 0).
-2.  **Dasar teori:** Segmentasi citra medis sangat bergantung pada pencarian nilai ambang batas (*threshold*). Algoritma morfologi sekunder juga diperlukan untuk menambal "lubang" kosong yang diakibatkan oleh pantulan cahaya putih kamera (*Glint*).
-3.  **Algoritma:** Algoritma **V3 Engine (SOP-04)** menggunakan metode *Adaptive Thresholding*. Ia memindai area piksel tergelap dalam citra ($V_{\text{min}}$) dan menambahkan konstanta offset untuk membentuk batas pembelah biner.
+2.  **Dasar teori:** Segmentasi frame medis sangat bergantung pada pencarian nilai ambang batas (*threshold*). Algoritma morfologi sekunder juga diperlukan untuk menambal "lubang" kosong yang diakibatkan oleh pantulan cahaya putih kamera (*Glint*).
+3.  **Algoritma:** Algoritma **V3 Engine (SOP-04)** menggunakan metode *Adaptive Thresholding*. Ia memindai area piksel tergelap dalam frame ($V_{\text{min}}$) dan menambahkan konstanta offset untuk membentuk batas pembelah biner.
 4.  **Parameter:** Rumus ambang batas dinamis yang digunakan adalah $T = V_{\text{min}} + 25$.
-5.  **Hasil segmentasi:** Rangkaian *Mask Biner* (citra hitam-putih mutlak). Area bola pupil tampak putih polos tanpa ada gangguan *glint*, berlatar belakang hitam pekat (*Binary Mask*).
+5.  **Hasil segmentasi:** Rangkaian *Mask Biner* (frame hitam-putih mutlak). Area bola pupil tampak putih polos tanpa ada gangguan *glint*, berlatar belakang hitam pekat (*Binary Mask*).
 
 ---
 
@@ -52,7 +52,7 @@
 
 1.  **Tujuan:** Melacak perpindahan titik pusat (koordinat sentroid X dan Y) area pupil di setiap rentetan *frame* secara berkesinambungan.
 2.  **Dasar teori:** Pergerakan pupil dalam format *time-series* sangat rentan terhadap *noise* ekstrem (misalnya saat kelopak mata menutup atau berkedip). Nilai koordinat saat berkedip tidak boleh dianggap sebagai data riil denyutan.
-3.  **Algoritma:** Program menghitung letak sentroid (titik keseimbangan) dari kumpulan piksel putih di citra mask biner. Untuk membuang data kedipan (*outliers*), program mengaplikasikan filter perata pergerakan, yakni *Moving Median*, pada aliran koordinat yang berjalan.
+3.  **Algoritma:** Program menghitung letak sentroid (titik keseimbangan) dari kumpulan piksel putih di frame mask biner. Untuk membuang data kedipan (*outliers*), program mengaplikasikan filter perata pergerakan, yakni *Moving Median*, pada aliran koordinat yang berjalan.
 4.  **Parameter:** Lebar jendela atau *Window Size* ($W$) untuk *Moving Median* ditetapkan secara ketat sebesar **150** *frame*.
 5.  **Hasil tracking:** Perekaman rekam jejak koordinat Cartesian yang halus, mulus, dan bebas dari lonjakan ekstrem akibat gangguan kedipan mekanis.
 
