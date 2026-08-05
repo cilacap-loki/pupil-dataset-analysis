@@ -57,3 +57,13 @@ Dokumen ini berisi kompilasi pertanyaan kritis yang sangat mungkin diajukan oleh
 > Sebagai perbandingan klinis: Pupil yang berdenyut lambat tapi meregang ekstrem hingga 40% dari ukuran normalnya, memiliki indikasi medis yang sangat berbeda dengan pupil yang berdenyut cepat tapi regangannya hanya kaku di angka 2%. 
 > 
 > **Fluktuasi Amplitudo (%) mengukur kekuatan/ekstremitas regangan.** Regangan yang terlalu tinggi (*hyper-reactive*) bisa mengindikasikan lonjakan adrenalin atau pengaruh obat stimulan, sementara regangan yang terlalu kaku (*stiff pupil*) bisa mengindikasikan penuaan dini atau kerusakan saraf. Dengan menggabungkan Hz dan Fluktuasi (%), algoritma kami memberikan **peta diagnosis 2D yang utuh** (Kecepatan & Kekuatan) kepada tenaga medis."
+
+---
+
+### Q8: Sebelum diubah menjadi persentase, kenapa selisih piksel (Max-Min) harus dibagi dulu dengan Rata-rata Baseline?
+**Jawaban Defense (Konsep Normalisasi & Keadilan Data):**
+> "Ini adalah inti dari **Normalisasi Data**. Ukuran bola mata setiap orang berbeda, dan jarak wajah ke kamera juga bisa berbeda-beda.
+> 
+> Bayangkan dua pasien: Pasien A (anak kecil) memiliki pupil asli yang sangat kecil (50 px). Pasien B (dewasa) memiliki pupil yang besar (200 px). Jika otot mata mereka sama-sama meregang sejauh 25 piksel, artinya sangat berbeda! Bagi Pasien A, regangan 25 px itu memakan 50% dari total matanya (sangat ekstrem). Tapi bagi Pasien B, regangan 25 px itu hanya 12.5% (sangat santai).
+> 
+> Jika program kita tidak membaginya dengan *baseline* dan hanya melaporkan angka piksel mentah, dokter akan mengira kedua pasien tersebut sama-sama sehat (karena sama-sama 25 px). Padahal itu salah fatal! Dengan membaginya terhadap *baseline*, algoritma kami menormalisasi data ke dalam bentuk **Persentase Relatif (%)**, sehingga dokter bisa membandingkan tingkat kesehatan saraf antar-manusia dengan adil tanpa terpengaruh ukuran mata asli mereka."
