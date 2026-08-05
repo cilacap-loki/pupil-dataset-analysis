@@ -33,7 +33,7 @@
 1.  **Tujuan:** Memotong frame penuh menjadi *Region of Interest* (ROI) yang hanya memuat area mata target, sekaligus menstabilkan pergerakan kepala pasien.
 2.  **Dasar teori:** Karena dataset direkam secara *in-the-wild*, gerakan kepala pasien menyebabkan posisi bola mata berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun stabil (*Motion-Stabilized Crop*) agar pupil tetap berada di tengah bingkai tanpa tergeser drastis.
 3.  **Algoritma:** Sistem menggunakan fungsi matematika penyeimbang *Exponential Moving Average* (EMA) untuk meredam efek guncangan kamera (titik tengah bergeser perlahan) tanpa menghilangkan getaran alami pupil mata.
-4.  **Parameter:** Konstanta penghalusan EMA ($\alpha$) ditetapkan sebesar **0.15**, dan ukuran bingkai hasil pemotongan adalah resolusi mutlak **800x800 piksel**.
+4.  **Parameter:** Parameter penstabil gerakan telah diatur agar kamera tidak berguncang secara berlebihan, dan ukuran bingkai hasil pemotongan dikunci pada resolusi **800x800 piksel**.
 5.  **Hasil deteksi:** Rangkaian frame *grayscale* berukuran 800x800 piksel yang terpusat tepat pada bola mata dan bebas dari guncangan ekstrem. Ini mengakhiri fase eksekusi **SOP-03**.
 
 ---
@@ -43,7 +43,7 @@
 1.  **Tujuan:** Memisahkan secara tegas antara objek target hitam pekat (Pupil, direpresentasikan dengan nilai biner 1) dan latar belakang yang tidak relevan seperti iris, sklera, atau kulit mata (direpresentasikan dengan biner 0).
 2.  **Dasar teori:** Segmentasi frame medis sangat bergantung pada pencarian nilai ambang batas (*threshold*). Algoritma morfologi sekunder juga diperlukan untuk menambal "lubang" kosong yang diakibatkan oleh pantulan cahaya putih kamera (*Glint*).
 3.  **Algoritma:** Algoritma **V3 Engine (SOP-04)** menggunakan metode *Adaptive Thresholding*. Ia memindai area piksel tergelap dalam frame ($V_{\text{min}}$) dan menambahkan konstanta offset untuk membentuk batas pembelah biner.
-4.  **Parameter:** Rumus ambang batas dinamis yang digunakan adalah $T = V_{\text{min}} + 25$.
+4.  **Parameter:** Nilai ambang batas (*threshold*) didapatkan secara otomatis dengan mencari piksel tergelap di dalam mata, lalu ditambah dengan nilai toleransi kecerahan sebesar 25 tingkat warna.
 5.  **Hasil segmentasi:** Rangkaian *Mask Biner* (frame hitam-putih mutlak). Area bola pupil tampak putih polos tanpa ada gangguan *glint*, berlatar belakang hitam pekat (*Binary Mask*).
 
 ---
@@ -53,7 +53,7 @@
 1.  **Tujuan:** Melacak perpindahan titik pusat (koordinat sentroid X dan Y) area pupil di setiap rentetan *frame* secara berkesinambungan.
 2.  **Dasar teori:** Pergerakan pupil dalam format *time-series* sangat rentan terhadap *noise* ekstrem (misalnya saat kelopak mata menutup atau berkedip). Nilai koordinat saat berkedip tidak boleh dianggap sebagai data riil denyutan.
 3.  **Algoritma:** Program menghitung letak sentroid (titik keseimbangan) dari kumpulan piksel putih di frame mask biner. Untuk membuang data kedipan (*outliers*), program mengaplikasikan filter perata pergerakan, yakni *Moving Median*, pada aliran koordinat yang berjalan.
-4.  **Parameter:** Lebar jendela atau *Window Size* ($W$) untuk *Moving Median* ditetapkan secara ketat sebesar **150** *frame*.
+4.  **Parameter:** Sistem menggunakan filter penstabil pergerakan yang menyaring dan meratakan data selama durasi tertentu (150 frame) untuk memastikan bahwa anomali seperti kedipan mata akan diabaikan oleh program.
 5.  **Hasil tracking:** Perekaman rekam jejak koordinat Cartesian yang halus, mulus, dan bebas dari lonjakan ekstrem akibat gangguan kedipan mekanis.
 
 ---
@@ -63,7 +63,7 @@
 1.  **Tujuan:** Mengonversi jumlah besaran total piksel di area putih pupil (Luas / Area 2D) menjadi satu nilai kuantitatif panjang garis tengah yang dapat ditarik vertikal maupun horizontal (Diameter 1D).
 2.  **Dasar teori:** Dengan meletakkan asumsi dasar bahwa bola pupil manusia mendekati bentuk lingkaran sempurna yang simetris, maka total luas piksel lingkarannya dapat ditarik mundur (*square root*) untuk menemukan nilai garis diameternya.
 3.  **Algoritma:** Menggunakan rumus perhitungan *Geometri Simetris Area-Equivalent*.
-4.  **Parameter:** $D = 2\sqrt{\text{Area}/\pi}$. "Area" didapat secara otomatis dengan menghitung total jumlah agregat piksel putih (nilai absolut 1) pada mask biner.
+4.  **Parameter:** Dengan menghitung total jumlah piksel putih yang membentuk area pupil pada mask biner, program mengonversinya menjadi perkiraan ukuran garis tengah (diameter) pupil menggunakan logika geometri lingkaran dasar.
 5.  **Hasil estimasi:** Satu nilai desimal metrik (*float*) bersatuan piksel (px) yang dihasilkan di setiap *frame* (misalnya: Frame ke-10 = 129.5 px, Frame ke-11 = 130.0 px).
 
 ---
@@ -85,7 +85,7 @@
     *   Sistem mencari seluruh puncak tertinggi lokal sementara (*Local Maxima*) di sepanjang kontur gelombang grafik garis biru.
     *   **Frekuensi:** Dihitung dengan rumus jumlah agregat Titik Puncak Oranye dibagi dengan total Durasi Video (Frekuensi = Jumlah Puncak / 30 Detik).
     *   **Fluktuasi:** Dihitung dengan rumus selisih rentang ekstrem (Diameter Maksimum dikurangi Diameter Minimum), kemudian nilainya **dibagi dengan Rata-rata Baseline (Garis Merah)**. Proses pembagian ini krusial untuk menghasilkan persentase relatif (%) demi menormalisasi ukuran regangan secara adil lintas-ukuran mata responden.
-4.  **Parameter:** Untuk menyaring puncak imajiner yang dihasilkan oleh *noise* statis, sistem mengimplementasikan penahan (*threshold*) jarak minimal (*Distance*) sebesar **15 frame** (0.3 detik antar puncak) dan ambang kejelasan regangan (*Prominence*) minimal **0.5 piksel**. Proses pencetakan tertuang pada eksekusi **SOP-05 & SOP-06**.
+4.  **Parameter:** Untuk memastikan bahwa getaran yang dihitung adalah denyut pupil asli dan bukan gangguan (*noise*) kamera, sistem mewajibkan adanya jarak jeda minimal antar-denyutan sebesar **15 frame** (0.3 detik) dan wujud regangan yang cukup terlihat (minimal **0.5 piksel**). Proses pencetakan tertuang pada eksekusi **SOP-05 & SOP-06**.
 5.  **Hasil analisis:** Teks diagnostik dalam berkas tertutup **Laporan Klinis PDF (SOP-06)** yang merumuskan dua indikator biologis utama tersebut secara tegas bagi tenaga kesehatan.
 
 ---
