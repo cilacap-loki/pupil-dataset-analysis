@@ -99,15 +99,3 @@
     *   Sistem mengeluarkan angka kuantitatif ilmiah berupa metrik akhir komparasi *Mean Euclidean Error*.
     *   Secara bersamaan, mesin *ffmpeg* mencetak luaran visual definitif berupa **Video 4-Panel** (Panel gabungan yang menjejalkan: Video Asli, Visualisasi Bounding Box Prediksi Mesin, Kotak Acuan Ground Truth Ahli, dan *Crosshair* Komparasi Sumbu X-Y).
 5.  **Kesimpulan:** Memberikan legitimasi ilmiah mutlak atas hipotesis penelitian bahwa algoritma *Pupil Dataset Processor* PDP, tidak hanya sanggup memproses data secara mandiri untuk kepentingan diagnostik klinis (Fase 1-2), tetapi juga teruji valid dan sanggup berkompetisi saat diadu akurasinya dengan basis anotasi standar penelitian di dunia (Fase 3).
-
----
-
-### **Lampiran**
-
-**Yang tidak dimasukkan ke dalam sub-bab 4, tetapi diwajibkan untuk diletakkan di halaman Lampiran Manuskrip/Laporan Akhir:**
-
-* a. Teks dan Struktur Kode Sumber (Source code) Python secara utuh untuk seluruh SOP (SOP-01 hingga SOP-09).
-* b. Berkas otentik contoh Laporan Klinis berformat PDF (Output SOP-06) per spesimen responden.
-* c. Berkas teks `pred.txt` yang memuat koordinat X,Y murni hasil tebakan sistem komputer.
-* d. Karakteristik spesifik dari Dataset Responden sekunder LPW (Umur, Jenis Kelamin subjek, Kondisi Cahaya saat perekaman).
-* e. Grafik deret waktu yang menggambarkan perbandingan rentang kesalahan (*Euclidean Error Plot*) di sepanjang durasi *frame*, yang bentuk visualnya terlalu memakan ruang bila diletakkan di dalam badan isi halaman laporan.
