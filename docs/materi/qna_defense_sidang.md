@@ -38,4 +38,22 @@ Dokumen ini berisi kompilasi pertanyaan kritis yang sangat mungkin diajukan oleh
 **Jawaban Defense (Jembatan Komputasi & Medis):**
 > "Frekuensi adalah jembatan antara ilmu komputasi dan medis. Frekuensi Hippus dikendalikan langsung oleh sistem saraf otonom. Seseorang yang rileks memiliki frekuensi yang stabil, sementara orang yang stres, panik, atau kelelahan kognitif (*cognitive overload*) akan memiliki frekuensi Hippus yang berantakan dan getaran yang lebih cepat.
 > 
-> Menghitung frekuensi (Hz) berarti kita mengonversi fenomena biologis abstrak menjadi parameter angka mutlak yang bisa dijadikan rujukan valid oleh dokter untuk diagnosis klinis."
+> Menghitung frekuensi (Hz) berarti kita mengonversi fenomena biologis abstrak menjadi parameter angka mutlak yang bisa dijadikan rujukan valid oleh dokter untuk diagnosis klinis masa depan."
+
+---
+
+### Q6: Kenapa Frekuensi menggunakan satuan Hz? Apa itu Hz sebenarnya?
+**Jawaban Defense (Standar Sains Global):**
+> "Hz adalah singkatan dari **Hertz**, yaitu satuan standar internasional (SI) dalam ilmu fisika untuk mengukur frekuensi. 1 Hz berarti tepat terjadi 1 kejadian (atau 1 siklus gelombang) dalam 1 detik. 
+> 
+> Karena denyutan Hippus pada dasarnya adalah sebuah 'gelombang biologis' (sama halnya seperti gelombang detak jantung, suara, atau listrik otak/EEG), maka secara ilmiah sangat wajib dan tepat bagi kita untuk mengukurnya menggunakan satuan standar gelombang dunia, yaitu Hertz."
+
+---
+
+### Q7: Jika kita sudah tahu Frekuensi (Hz)-nya, lalu untuk apa kita perlu capek-capek menghitung Fluktuasi Amplitudo (%)?
+**Jawaban Defense (Kecepatan vs Kekuatan):**
+> "Karena Frekuensi (Hz) saja tidak menceritakan gambaran utuh dari kondisi medis seseorang! Frekuensi hanya memberi tahu kita **seberapa cepat (sering)** pupil berdenyut, tetapi tidak memberi tahu kita **seberapa kuat (ekstrem)** regangan denyutan tersebut.
+> 
+> Sebagai perbandingan klinis: Pupil yang berdenyut lambat tapi meregang ekstrem hingga 40% dari ukuran normalnya, memiliki indikasi medis yang sangat berbeda dengan pupil yang berdenyut cepat tapi regangannya hanya kaku di angka 2%. 
+> 
+> **Fluktuasi Amplitudo (%) mengukur kekuatan/ekstremitas regangan.** Regangan yang terlalu tinggi (*hyper-reactive*) bisa mengindikasikan lonjakan adrenalin atau pengaruh obat stimulan, sementara regangan yang terlalu kaku (*stiff pupil*) bisa mengindikasikan penuaan dini atau kerusakan saraf. Dengan menggabungkan Hz dan Fluktuasi (%), algoritma kami memberikan **peta diagnosis 2D yang utuh** (Kecepatan & Kekuatan) kepada tenaga medis."
