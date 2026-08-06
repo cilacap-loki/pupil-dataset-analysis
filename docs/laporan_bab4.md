@@ -12,9 +12,9 @@
 
 1.  **Tujuan:** Memasukkan dataset video mata mentah ke dalam lingkungan komputasi (*workspace*) agar dapat diakses oleh algoritma pra-pemrosesan.
 2.  **Dasar teori singkat:** Video digital adalah sekumpulan frame (*frames*) yang diputar secara sekuensial pada kecepatan tertentu (*Frame Rate*). Semakin tinggi *frame rate*, semakin detail pergerakan mikroskopis mata (Hippus) yang dapat direkam.
-3.  **Spesifikasi data/video:** Penelitian ini menggunakan **Dataset Sekunder Labeled Pupils in the Wild (LPW)**. Format video adalah `.avi` yang direkam menggunakan *head-mounted camera* dengan sudut pandang samping (*Side View Angle*). Frame rate bervariasi antara 50 hingga 95 FPS.
-4.  **Implementasi:** Proses ini diimplementasikan dalam **SOP-01 (Inisialisasi Environment)**. Sistem melakukan pemasangan (*mounting*) pada Google Drive dan menginisialisasi jalur direktori untuk membaca folder responden (misal: subfolder `001`, `004`, `015`).
-5.  **Hasil implementasi:** Direktori kerja terhubung secara sukses dengan sumber dataset sekunder, ditandai dengan ditemukannya berkas `.avi` dan `.txt` (Kunci Jawaban) milik target responden.
+3.  **Spesifikasi data/video:** Penelitian ini menggunakan **Dataset Primer berisikan 70 responden**. Video direkam secara stabil menggunakan tripod dengan posisi responden duduk nyaman dan menatap lurus ke arah kamera (*steady*).
+4.  **Implementasi:** Proses ini diimplementasikan dalam **SOP-01 (Inisialisasi Environment)**. Sistem melakukan pemasangan (*mounting*) pada Google Drive dan menginisialisasi jalur direktori untuk membaca folder dataset dari 70 responden tersebut (misal: subfolder `001`, `004`, `015`).
+5.  **Hasil implementasi:** Direktori kerja terhubung secara sukses dengan sumber dataset primer, ditandai dengan ditemukannya berkas video rekaman dari masing-masing target responden.
 
 ---
 
@@ -31,10 +31,10 @@
 **4.5.4 Eye Detection**
 
 1.  **Tujuan:** Memotong frame penuh menjadi *Region of Interest* (ROI) yang hanya memuat area mata target, sekaligus menstabilkan pergerakan kepala pasien.
-2.  **Dasar teori:** Karena dataset direkam secara *in-the-wild*, gerakan kepala pasien menyebabkan posisi bola mata berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun stabil (*Motion-Stabilized Crop*) agar pupil tetap berada di tengah bingkai tanpa tergeser drastis.
-3.  **Algoritma:** Sistem menggunakan fungsi matematika penyeimbang *Exponential Moving Average* (EMA) untuk meredam efek guncangan kamera (titik tengah bergeser perlahan) tanpa menghilangkan getaran alami pupil mata.
-4.  **Parameter:** Parameter penstabil gerakan telah diatur agar kamera tidak berguncang secara berlebihan, dan ukuran bingkai hasil pemotongan dikunci pada resolusi **800x800 piksel**.
-5.  **Hasil deteksi:** Rangkaian frame *grayscale* berukuran 800x800 piksel yang terpusat tepat pada bola mata dan bebas dari guncangan ekstrem. Ini mengakhiri fase eksekusi **SOP-03**.
+2.  **Dasar teori:** Meskipun pengambilan video telah dilakukan secara stabil menggunakan tripod, pergerakan alami dari kepala pasien (seperti tarikan napas atau pergeseran postur) tetap menyebabkan posisi bola mata sedikit berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun tetap stabil (*Motion-Stabilized Crop*) agar pupil senantiasa terkunci di tengah bingkai.
+3.  **Algoritma:** Sistem menggunakan fungsi matematika penyeimbang *Exponential Moving Average* (EMA) untuk meredam pergeseran titik koordinat mata yang diakibatkan oleh pergerakan minor kepala tersebut, tanpa sedikitpun menghilangkan getaran asli denyut pupil.
+4.  **Parameter:** Parameter penstabil gerakan diatur untuk menoleransi pergeseran pelan (kepala), dan ukuran bingkai hasil pemotongan dikunci secara mutlak pada resolusi **800x800 piksel**.
+5.  **Hasil deteksi:** Rangkaian frame *grayscale* berukuran 800x800 piksel yang terpusat secara konsisten dan stabil pada bola mata. Ini mengakhiri fase eksekusi **SOP-03**.
 
 ---
 
