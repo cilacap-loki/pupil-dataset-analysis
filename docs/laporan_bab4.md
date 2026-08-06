@@ -51,20 +51,20 @@
 **4.5.6 Pupil Tracking**
 
 1.  **Tujuan:** Melacak perpindahan titik pusat (koordinat sentroid X dan Y) area pupil di setiap rentetan *frame* secara berkesinambungan.
-2.  **Dasar teori:** Pergerakan pupil dalam format *time-series* sangat rentan terhadap *noise* ekstrem (misalnya saat kelopak mata menutup atau berkedip). Nilai koordinat saat berkedip tidak boleh dianggap sebagai data riil denyutan.
-3.  **Algoritma:** Program menghitung letak sentroid (titik keseimbangan) dari kumpulan piksel putih di frame mask biner. Untuk membuang data kedipan (*outliers*), program mengaplikasikan filter perata pergerakan, yakni *Moving Median*, pada aliran koordinat yang berjalan.
-4.  **Parameter:** Sistem menggunakan filter penstabil pergerakan yang menyaring dan meratakan data selama durasi tertentu (150 frame) untuk memastikan bahwa anomali seperti kedipan mata akan diabaikan oleh program.
+2.  **Dasar teori:** Pergerakan pupil dalam format *time-series* sangat rentan terhadap *noise* ekstrem (misalnya saat kelopak mata menutup atau berkedip). Nilai koordinat saat berkedip harus dideteksi dan diabaikan agar tidak merusak data pelacakan.
+3.  **Algoritma:** Program membaca metrik intensitas cahaya pada area mata untuk mendeteksi kedipan (jika tingkat kecerahan jatuh secara drastis, *frame* diabaikan). Pada *frame* yang valid, program melacak letak sentroid area pupil lalu menggunakan *Exponential Moving Average* (EMA) Tracker untuk menghaluskan lintasan koordinat antar-*frame*.
+4.  **Parameter:** Sistem menggunakan parameter penstabil EMA khusus (berbeda dengan EMA pada SOP-03) yang diperuntukkan murni untuk menjaga kehalusan sumbu koordinat (X, Y) dari titik pusat mata saat bergeser.
 5.  **Hasil tracking:** Perekaman rekam jejak koordinat Cartesian yang halus, mulus, dan bebas dari lonjakan ekstrem akibat gangguan kedipan mekanis.
 
 ---
 
 **4.5.7 Estimasi Diameter Pupil**
 
-1.  **Tujuan:** Mengonversi jumlah besaran total piksel di area putih pupil (Luas / Area 2D) menjadi satu nilai kuantitatif panjang garis tengah yang dapat ditarik vertikal maupun horizontal (Diameter 1D).
-2.  **Dasar teori:** Dengan meletakkan asumsi dasar bahwa bola pupil manusia mendekati bentuk lingkaran sempurna yang simetris, maka total luas piksel lingkarannya dapat ditarik mundur (*square root*) untuk menemukan nilai garis diameternya.
-3.  **Algoritma:** Menggunakan rumus perhitungan *Geometri Simetris Area-Equivalent*.
-4.  **Parameter:** Dengan menghitung total jumlah piksel putih yang membentuk area pupil pada mask biner, program mengonversinya menjadi perkiraan ukuran garis tengah (diameter) pupil menggunakan logika geometri lingkaran dasar.
-5.  **Hasil estimasi:** Satu nilai desimal metrik (*float*) bersatuan piksel (px) yang dihasilkan di setiap *frame* (misalnya: Frame ke-10 = 129.5 px, Frame ke-11 = 130.0 px).
+1.  **Tujuan:** Mengonversi objek dua dimensi (2D) pupil pada mask biner menjadi satu nilai kuantitatif panjang garis tengah (Diameter 1D).
+2.  **Dasar teori:** Bentuk pupil manusia di dunia nyata seringkali tidak berupa lingkaran sempurna melainkan agak elips/lonjong, terutama saat direkam dari sudut miring (*side view angle*). Oleh karena itu, pendekatan *fitting* bentuk elips lebih akurat daripada sekadar menghitung luas area lingkaran kasar.
+3.  **Algoritma:** Menggunakan algoritma geometri komputasi **Ellipse Fitting**.
+4.  **Parameter:** Program menggambar garis luar melingkar (kontur) pada area pupil putih, lalu membungkus kontur tersebut ke dalam bentuk Elips 2D. Nilai diameter ekuivalen didapatkan dengan cara mencari nilai rata-rata antara panjang Sumbu Mayor (garis terpanjang elips) dan Sumbu Minor (garis terpendek elips).
+5.  **Hasil estimasi:** Satu nilai desimal metrik (*float*) bersatuan piksel (px) yang mewakili ukuran rata-rata bukaan pupil pada *frame* terkait (misal: 129.5 px).
 
 ---
 
@@ -72,7 +72,7 @@
 
 1.  **Tujuan:** Memvisualisasikan pergerakan atau fluktuasi perubahan diameter pupil sepanjang 30 detik durasi rekaman ke dalam wujud diagram garis dua dimensi.
 2.  **Dasar teori:** Deret data temporal akan sangat jauh lebih mudah dianalisis secara mendalam oleh peneliti apabila dipetakan pada sumbu kartesius dengan Waktu sebagai sumbu kontrol independen (Sumbu X) dan nilai pengukuran sebagai sumbu dependen (Sumbu Y).
-3.  **Implementasi:** Modul pustaka `Matplotlib` mem-plot seluruh *array* hasil diameter pupil secara sekuensial. Garis biru solid menggambarkan kurva pergerakan ukuran *real-time* mata. Garis merah putus-putus (*Trend Baseline*) ditambahkan sebagai representasi matematis dari rata-rata diam (*Moving Average*) dari pupil.
+3.  **Implementasi:** Modul pustaka `Matplotlib` mem-plot seluruh *array* hasil diameter pupil secara sekuensial. Garis biru solid menggambarkan kurva pergerakan ukuran *real-time* mata. Garis merah putus-putus (*Trend Baseline*) ditambahkan sebagai representasi matematis dari nilai pergerakan rata-rata (*Moving Average*), yang dihitung dengan menyaring data ukuran pupil dalam rentang jendela perataan (**150 frame**).
 4.  **Hasil Visual:** Menghasilkan kanvas grafik garis dengan Sumbu Y berupa ukuran Diameter (px) dan Sumbu X berupa Titik Waktu/Frame (*Frame Number*).
 
 ---
