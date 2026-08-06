@@ -83,8 +83,10 @@
 2.  **Dasar teori:** Fenomena Hippus dicirikan oleh hadirnya gelombang fluktuasi involunter dan regangan elastisitas pupil yang terikat dengan keseimbangan sistem saraf otonom (simpatik dan parasimpatik).
 3.  **Algoritma ekstraksi:**
     *   Sistem mencari seluruh puncak tertinggi lokal sementara (*Local Maxima*) di sepanjang kontur gelombang grafik garis biru.
-    *   **Frekuensi:** Dihitung dengan rumus jumlah agregat Titik Puncak Oranye dibagi dengan total Durasi Video (Frekuensi = Jumlah Puncak / 30 Detik).
-    *   **Fluktuasi:** Dihitung dengan rumus selisih rentang ekstrem (Diameter Maksimum dikurangi Diameter Minimum), kemudian nilainya **dibagi dengan Rata-rata Baseline (Garis Merah)**. Proses pembagian ini krusial untuk menghasilkan persentase relatif (%) demi menormalisasi ukuran regangan secara adil lintas-ukuran mata responden.
+    *   **Frekuensi:** Dihitung dengan membagi total kemunculan titik puncak dengan durasi rekaman keseluruhan.
+        *(Rumus: Frekuensi (Hz) = Total Jumlah Puncak / Total Durasi Video)*
+    *   **Fluktuasi:** Dihitung dengan mencari selisih antara bukaan mata terbesar dan terkecil, lalu menormalisasinya terhadap ukuran mata saat rileks.
+        *(Rumus: Fluktuasi (%) = ((Diameter Maksimum - Diameter Minimum) / Rata-rata Baseline) x 100%)*
 4.  **Parameter:** Untuk memastikan bahwa getaran yang dihitung adalah denyut pupil asli dan bukan gangguan (*noise*) kamera, sistem mewajibkan adanya jarak jeda minimal antar-denyutan sebesar **15 frame** (0.3 detik) dan wujud regangan yang cukup terlihat (minimal **0.5 piksel**). Proses pencetakan tertuang pada eksekusi **SOP-05 & SOP-06**.
 5.  **Hasil analisis:** Teks diagnostik dalam berkas tertutup **Laporan Klinis PDF (SOP-06)** yang merumuskan dua indikator biologis utama tersebut secara tegas bagi tenaga kesehatan.
 
