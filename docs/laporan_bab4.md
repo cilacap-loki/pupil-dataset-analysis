@@ -31,9 +31,9 @@
 **4.5.4 Eye Detection**
 
 1.  **Tujuan:** Memotong frame penuh menjadi *Region of Interest* (ROI) yang hanya memuat area mata target, sekaligus menstabilkan pergerakan kepala responden.
-2.  **Dasar teori:** Meskipun pengambilan video telah dilakukan secara stabil menggunakan tripod, pergerakan alami dari kepala responden (seperti tarikan napas atau pergeseran postur) tetap menyebabkan posisi bola mata sedikit berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun tetap stabil (*Motion-Stabilized Crop*) agar pupil senantiasa terkunci di tengah bingkai.
+2.  **Dasar teori:** Meskipun pengambilan video telah dilakukan secara stabil menggunakan tripod, pergerakan alami dari kepala responden (seperti tarikan napas atau pergeseran postur) tetap menyebabkan posisi bola mata sedikit berpindah-pindah antar *frame*. Pemotongan ROI harus bersifat dinamis namun tetap stabil (*Motion-Stabilized Crop*) agar pupil senantiasa terkunci di tengah *frame*.
 3.  **Algoritma:** Sistem menggunakan fungsi matematika penyeimbang *Exponential Moving Average* (EMA) untuk meredam pergeseran titik koordinat mata yang diakibatkan oleh pergerakan minor kepala tersebut, tanpa sedikitpun menghilangkan getaran asli denyut pupil.
-4.  **Parameter:** Parameter penstabil gerakan diatur untuk menoleransi pergeseran pelan (kepala), dan ukuran bingkai hasil pemotongan dikunci secara mutlak pada resolusi **800x800 piksel**.
+4.  **Parameter:** Parameter penstabil gerakan diatur untuk menoleransi pergeseran pelan (kepala), dan ukuran *frame* hasil pemotongan dikunci secara mutlak pada resolusi **800x800 piksel**.
 5.  **Hasil deteksi:** Rangkaian frame *grayscale* berukuran 800x800 piksel yang terpusat secara konsisten dan stabil pada bola mata. Ini mengakhiri fase eksekusi **SOP-03**.
 
 ---
