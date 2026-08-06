@@ -12,8 +12,8 @@
 
 1.  **Tujuan:** Memasukkan dataset video mata mentah ke dalam lingkungan komputasi (*workspace*) agar dapat diakses oleh algoritma pra-pemrosesan.
 2.  **Dasar teori singkat:** Video digital adalah sekumpulan frame (*frames*) yang diputar secara sekuensial pada kecepatan tertentu (*Frame Rate*). Semakin tinggi *frame rate*, semakin detail pergerakan mikroskopis mata (Hippus) yang dapat direkam.
-3.  **Spesifikasi data/video:** Penelitian ini menggunakan **Dataset Primer berisikan 70 responden**. Video direkam secara stabil menggunakan tripod dengan posisi responden duduk nyaman dan menatap lurus ke arah kamera (*steady*).
-4.  **Implementasi:** Proses ini diimplementasikan dalam **SOP-01 (Inisialisasi Environment)**. Sistem melakukan pemasangan (*mounting*) pada Google Drive dan menginisialisasi jalur direktori untuk membaca folder dataset dari 70 responden tersebut.
+3.  **Spesifikasi data/video:** Penelitian ini menggunakan **Dataset Primer berisikan 60 responden**. Video direkam secara stabil menggunakan tripod dengan posisi responden duduk nyaman dan menatap lurus ke arah kamera (*steady*).
+4.  **Implementasi:** Proses ini diimplementasikan dalam **SOP-01 (Inisialisasi Environment)**. Sistem melakukan pemasangan (*mounting*) pada Google Drive dan menginisialisasi jalur direktori untuk membaca folder dataset dari 60 responden tersebut.
 5.  **Hasil implementasi:** Direktori kerja terhubung secara sukses dengan sumber dataset primer, ditandai dengan ditemukannya berkas video rekaman dari masing-masing target responden.
 
 ---
@@ -42,7 +42,7 @@
 
 1.  **Tujuan:** Memisahkan secara tegas antara objek target hitam pekat (Pupil, direpresentasikan dengan nilai biner 1) dan latar belakang yang tidak relevan seperti iris, sklera, atau kulit mata (direpresentasikan dengan biner 0).
 2.  **Dasar teori:** Segmentasi objek spesifik sangat bergantung pada pencarian nilai ambang batas (*threshold*). Algoritma morfologi sekunder juga diperlukan untuk menambal "lubang" kosong yang diakibatkan oleh pantulan cahaya putih kamera (*Glint*).
-3.  **Algoritma:** Algoritma **V3 Engine (SOP-04)** menggunakan metode *Adaptive Thresholding*. Ia memindai area piksel tergelap dalam frame ($V_{\text{min}}$) dan menambahkan konstanta offset untuk membentuk batas pembelah biner.
+3.  **Algoritma:** Algoritma **V3 Engine (SOP-04)** menggunakan metode *Adaptive Thresholding*. Ia memindai area piksel tergelap dalam frame (*V_min*) dan menambahkan konstanta offset untuk membentuk batas pembelah biner.
 4.  **Parameter:** Nilai ambang batas (*threshold*) didapatkan secara otomatis dengan mencari piksel tergelap di dalam mata, lalu ditambah dengan nilai toleransi kecerahan sebesar 25 tingkat warna.
 5.  **Hasil segmentasi:** Rangkaian *Mask Biner* (frame hitam-putih mutlak). Area bola pupil tampak putih polos tanpa ada gangguan *glint*, berlatar belakang hitam pekat (*Binary Mask*).
 
